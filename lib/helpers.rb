@@ -20,6 +20,12 @@ class CoordinateGrid
     nil
   end
 
+  def size
+    x = grid.sort.map { |row| row[1].sort.length }.max
+    y = grid.sort.length
+    {x: x, y: y}
+  end
+
   def set(x, y, value)
     grid[y][x] = value if grid[y]
   end
@@ -67,6 +73,18 @@ class CoordinateGrid
     grid.values.reduce([]) do |res, line|
       res + line.values
     end
+  end
+
+  def row(y)
+    grid[y].sort.map { |row| row[1] }
+  end
+
+  def rows
+    grid.sort.map { |row| row[1].sort.map { |c| c[1] } }
+  end
+
+  def column(x)
+    grid.sort.map { |row| row[1][x] }
   end
 end
 
